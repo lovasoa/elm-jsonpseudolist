@@ -11,7 +11,11 @@ Elm Json.Decoder for javascript Array-like objects, of the form:
 import Json.Decode exposing (..)
 
 
-{-| Read an object of the form
+{-| Create a decoder for objects of the form:
+
+    {"length": Number, "0": Value, "1": Value, ...}
+
+    Takes just one argument: the decoder for `Value`
 
     >>> Json.Decode.decodeString
     ...     (jsonPseudoList Json.Decode.string)
