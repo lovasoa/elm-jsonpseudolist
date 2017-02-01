@@ -17,6 +17,9 @@ import Json.Decode exposing (..)
 
     Takes just one argument: the decoder for `Value`
 
+    You need to use Json.Decode with this module
+    >>> import Json.Decode
+
     >>> Json.Decode.decodeString
     ...     (jsonPseudoList Json.Decode.string)
     ...     """{
