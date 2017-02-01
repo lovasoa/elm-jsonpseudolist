@@ -16,8 +16,7 @@ import Json.Decode exposing (..)
 
 
 {-| Create a decoder for objects of the form:
-
-    {"length": Number, "0": Value, "1": Value, ...}
+`{"length": Number, "0": Value, "1": Value, ...}`
 
     Takes just one argument: the decoder for `Value`
 
