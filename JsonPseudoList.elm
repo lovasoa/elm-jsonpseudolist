@@ -8,6 +8,8 @@ Elm Json.Decoder for javascript Array-like objects, of the form:
 @docs jsonPseudoList
 -}
 
+import Json.Decode exposing (..)
+
 
 {-| Read an object of the form
 {
@@ -15,17 +17,31 @@ Elm Json.Decoder for javascript Array-like objects, of the form:
   "0" : Object0
   "1" : Object1
 }
+    >>> Json.Decode.decodeString
+    ...     (jsonPseudoList Json.Decode.string)
+    ...     """{
+    ...           "length": 2,
+    ...           "0": "hello"
+    ...           "1": "world"
+    ...         }"""
+    ["hello", "world"]
 -}
-jsonPseudoList : Json.Decoder a -> Json.Decoder (List a)
+jsonPseudoList : Decoder a -> Decoder (List a)
 jsonPseudoList decoder =
-    let
-        addvalue num list =
-            Json.map (\val -> val :: list) ((toString num) := decoder)
+    field "length" int
+        |> andThen (fromLength decoder)
 
-        fromLength length =
-            List.foldr
-                (\num prevdec -> prevdec `Json.andThen` (addvalue num))
-                (Json.succeed [])
-                [0..length - 1]
-    in
-        ("length" := Json.int) `Json.andThen` fromLength
+
+fromLength : Decoder a -> Int -> Decoder (List a)
+fromLength decoder length =
+    List.foldr
+        (\num -> andThen (addvalue decoder num))
+        (succeed [])
+        (List.range 0 (length - 1))
+
+
+addvalue : Decoder a -> Int -> List a -> Decoder (List a)
+addvalue decoder num list =
+    map
+        (\val -> val :: list)
+        (field (toString num) decoder)
