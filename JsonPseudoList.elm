@@ -12,11 +12,7 @@ import Json.Decode exposing (..)
 
 
 {-| Read an object of the form
-{
-  "length" : 2
-  "0" : Object0
-  "1" : Object1
-}
+
     >>> Json.Decode.decodeString
     ...     (jsonPseudoList Json.Decode.string)
     ...     """{
