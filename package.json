@@ -1,0 +1,13 @@
+{
+  "version": "1.0.2",
+  "summary": "JSON decoder for pseudo-array objects ({\"length\":1, \"0\": 123})",
+  "repository": "https://github.com/lovasoa/elm-jsonpseudolist.git",
+  "license": "BSD-3-Clause",
+  "scripts": {
+    "test": "elm-test init && elm-doc-test && elm-test tests/Doc/Main.elm"
+  },
+  "devDependencies": {
+    "elm-doc-test": "^2.2.3",
+    "elm-test": "^0.18.2"
+  }
+}

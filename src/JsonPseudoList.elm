@@ -24,10 +24,10 @@ import Json.Decode exposing (..)
     ...     (jsonPseudoList Json.Decode.string)
     ...     """{
     ...           "length": 2,
-    ...           "0": "hello"
+    ...           "0": "hello",
     ...           "1": "world"
     ...         }"""
-    ["hello", "world"]
+    Ok ["hello", "world"]
 -}
 jsonPseudoList : Decoder a -> Decoder (List a)
 jsonPseudoList decoder =

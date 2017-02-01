@@ -1,8 +1,3 @@
 language: node_js
 node_js:
   - "6"
-before_script:
-  - npm install -g elm elm-test elm-doc-test
-  - elm-test init
-  - elm-doc-test
-script: elm-test tests/Doc/Main.elm
